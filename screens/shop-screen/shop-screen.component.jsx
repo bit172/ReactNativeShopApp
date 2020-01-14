@@ -6,7 +6,9 @@ import CustomTitle from "../../components/custom-title/custom-title.component";
 class ShopScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: () => <CustomTitle title="Shop" navigation={navigation} />
+      headerTitle: () => (
+        <CustomTitle title="Shop" navigation={navigation} destination="Cart" />
+      )
     };
   };
 
