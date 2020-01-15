@@ -15,9 +15,15 @@ class ShopScreen extends React.Component {
   }
 
   static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
     return {
       headerTitle: () => (
-        <CustomTitle title="Shop" navigation={navigation} destination="Cart" />
+        <CustomTitle
+          title="Shop"
+          navigation={navigation}
+          destination="Cart"
+          cart={params.cart}
+        />
       )
     };
   };
@@ -36,7 +42,8 @@ class ShopScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Text style={styles.header}>{this.state.cart.length}</Text>
+        <Text style={styles.header}>Total Items: {this.state.cart.length}</Text>
+        <Text style={styles.header}></Text>
         <Text style={styles.header}>Welcome to my shop!</Text>
         <ShopItemList
           items={SHOP_DATA}

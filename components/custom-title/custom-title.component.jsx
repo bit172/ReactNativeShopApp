@@ -4,14 +4,14 @@ import { AntDesign } from "@expo/vector-icons";
 
 import { styles } from "./custom-title.styles";
 
-const CustomTitle = ({ title, navigation, destination }) => {
+const CustomTitle = ({ title, navigation, destination, cart }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <AntDesign
         name="shoppingcart"
         size={32}
-        onPress={() => navigation.navigate(destination)}
+        onPress={() => navigation.navigate(destination, { cart: cart })}
       />
     </View>
   );

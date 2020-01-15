@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     alignContent: "center",
     flexDirection: "row",
+    justifyContent: "space-between",
     borderStyle: "solid",
     borderWidth: 1,
     width: Dimensions.get("window").width * 0.9,
@@ -13,20 +14,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10
   },
 
-  image: {
-    flex: 1
-  },
-
-  text: {
-    flex: 3,
-    marginHorizontal: 8
-  },
-
   name: {
     fontWeight: "bold"
-  },
-
-  addToCart: {
-    flex: 2
   }
 });

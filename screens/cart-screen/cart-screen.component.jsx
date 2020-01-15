@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, ScrollView, Text } from "react-native";
+import CartItemList from "../../components/cart-item-list/cart-item-list.component";
 
 class CartScreen extends React.Component {
   static navigationOptions = ({ navigation, navigationOptions }) => {
@@ -11,9 +12,23 @@ class CartScreen extends React.Component {
   render() {
     const { navigation } = this.props;
     return (
-      <View>
-        <Text></Text>
-      </View>
+      <ScrollView>
+        {navigation.getParam("cart", "NO CART").length ? (
+          <View>
+            <CartItemList cartItems={navigation.getParam("cart", "NO CART")} />
+            <Text
+              style={{ fontWeight: "bold", fontSize: 22, textAlign: "center" }}
+            >
+              Total: ${" "}
+              {navigation
+                .getParam("cart", "NO CART")
+                .reduce((acc, item) => acc + item.price, 0)}
+            </Text>
+          </View>
+        ) : (
+          <Text>Your cart is empty</Text>
+        )}
+      </ScrollView>
     );
   }
 }
