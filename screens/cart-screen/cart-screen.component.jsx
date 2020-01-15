@@ -9,9 +9,10 @@ class CartScreen extends React.Component {
   };
 
   render() {
+    const { navigation } = this.props;
     return (
       <View>
-        <Text>Cart</Text>
+        <Text></Text>
       </View>
     );
   }
