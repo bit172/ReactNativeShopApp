@@ -1,15 +1,21 @@
-import React from "react";
-import { View, Text, Image } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { View, Text, Image, ToastAndroid } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import { styles } from "./shop-item.styles";
+import CartContext from "../../context/cart.context";
 
 const ShopItem = props => {
   const { name, price, description, imageUrl } = props.item;
 
-  const handleChange = () => {
-    props.cart.push(props.item);
-    props.addItem(props.cart);
+  const { setCart } = useContext(CartContext);
+
+  const addToCart = item => {
+    setCart(c => {
+      if (Platform.OS === "android")
+        ToastAndroid.show("Item Added", ToastAndroid.SHORT);
+      return c.concat([item]);
+    });
   };
 
   return (
@@ -27,7 +33,9 @@ const ShopItem = props => {
           name="pluscircleo"
           size={32}
           style={{ textAlign: "center" }}
-          onPress={handleChange}
+          onPress={() => {
+            addToCart(props.item);
+          }}
         />
         <Text>Add to cart</Text>
       </View>

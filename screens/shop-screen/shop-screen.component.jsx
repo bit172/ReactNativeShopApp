@@ -1,7 +1,9 @@
 import React from "react";
-import { ScrollView, Text, ToastAndroid } from "react-native";
+import { ScrollView, Text, Platform, ToastAndroid, Alert } from "react-native";
 
 import { SHOP_DATA } from "./shop.data";
+
+import { CartConsumer } from "./../../context/cart.context";
 
 import CustomTitle from "../../components/custom-title/custom-title.component";
 import ShopItemList from "../../components/shop-item-list/shop-item-list.component";
@@ -18,38 +20,22 @@ class ShopScreen extends React.Component {
     const { params = {} } = navigation.state;
     return {
       headerTitle: () => (
-        <CustomTitle
-          title="Shop"
-          navigation={navigation}
-          destination="Cart"
-          cart={params.cart}
-        />
+        <CustomTitle title="Shop" navigation={navigation} destination="Cart" />
       )
     };
-  };
-
-  componentDidMount() {
-    this.props.navigation.setParams({ cart: this.state.cart });
-  }
-
-  onCartChange = newCart => {
-    this.props.navigation.setParams({ cart: newCart });
-    this.setState({ cart: newCart }, () =>
-      ToastAndroid.show("Item Added", ToastAndroid.SHORT)
-    );
   };
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Text style={styles.header}>Total Items: {this.state.cart.length}</Text>
+        <CartConsumer>
+          {props => (
+            <Text style={styles.header}>Total Items: {props.cart.length}</Text>
+          )}
+        </CartConsumer>
         <Text style={styles.header}></Text>
         <Text style={styles.header}>Welcome to my shop!</Text>
-        <ShopItemList
-          items={SHOP_DATA}
-          cart={this.state.cart}
-          cartChange={this.onCartChange}
-        />
+        <ShopItemList items={SHOP_DATA} />
       </ScrollView>
     );
   }
